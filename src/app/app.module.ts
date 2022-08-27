@@ -10,12 +10,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from '@angular/material/button';
 import {MatDividerModule} from "@angular/material/divider";
-import { MatInputModule} from "@angular/material/input";
+import {MatInputModule} from "@angular/material/input";
 import {ReactiveFormsModule} from "@angular/forms";
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { ToastrModule } from 'ngx-toastr';
+import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
+import {AngularFireModule} from "@angular/fire/compat";
+import {MatSelectModule} from '@angular/material/select';
+
 
 @NgModule({
   declarations: [
@@ -23,7 +27,8 @@ import { ToastrModule } from 'ngx-toastr';
     CadastrarComponent,
     ListarComponent,
     FooterComponent,
-    HeaderComponent
+    HeaderComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -34,9 +39,10 @@ import { ToastrModule } from 'ngx-toastr';
     MatDividerModule,
     MatInputModule,
     ReactiveFormsModule,
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideFirestore(() => getFirestore()),
     ToastrModule.forRoot(),
+    AngularFirestoreModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
