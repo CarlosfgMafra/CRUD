@@ -1,10 +1,14 @@
 
-<div class="card mx-2">
-  <div class="card-body">
 
-    <h2 class="titulo">
-      vcvzdfasdasdasdasdasd
-    </h2>
+
+
+
+
+<div class="mx-2">
+
+    <h3 class="mx-2 border-bottom tit">
+    Lista de produtos cadastrados
+    </h3>
     <table class="table">
       <tbody>
       <tr *ngFor="let produto of product">
@@ -12,11 +16,12 @@
         <td>{{ produto.preco }}</td>
         <td>{{ produto.descricao}}</td>
         <td>
-<!--          <i (click)="editarTarjeta(tarjeta)" class="far fa-edit text-info"></i>-->
-<!--          <i (click)="eliminarTarjeta(tarjeta.id)" class="far fa-trash-alt text-danger"></i>-->
+          <button (click)="editarProdutos(produto)"><i  class="bi bi-pencil-square text-info f-5 mx-3"></i></button>
+          <button (click)="deletarProdutos(produto.id)" ><i class="bi bi-trash3 text-danger f-5 mx-3"></i></button>
         </td>
       </tr>
       </tbody>
     </table>
-  </div>
+
 </div>
+

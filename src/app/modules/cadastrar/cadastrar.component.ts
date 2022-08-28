@@ -13,6 +13,7 @@ import {ToastrService} from "ngx-toastr";
 export class CadastrarComponent implements OnInit {
   form: FormGroup;
   loading = false;
+  id: string | undefined;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -27,8 +28,28 @@ export class CadastrarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+this.armazem.geteditar().subscribe(data => {
+  this.id = data.id;
+  this.form.patchValue(({
+    categoria: data.categoria,
+    preco: data.preco,
+    descricao: data.descricao,
+  }))
+})
 
   }
+
+  decidir(){
+    if (this.id === undefined){
+      this.cadastrar();
+    } else {
+      this.editarProduto(this.id);
+    }
+  }
+
+
+
+
   cadastrar(){
     const cadastro: ProdutoModel = {
       categoria: this.form.value.categoria,
@@ -40,14 +61,38 @@ export class CadastrarComponent implements OnInit {
     this.armazem.cadastrar(cadastro).then(()=>{
       this.loading = false;
       console.log('Produto Cadastrado!');
-      this.toastr.success('O produto foi registrado com êxito!', 'Produto Cadastrado!')
       this.form.reset();
+      this.toastr.success('O produto foi registrado com êxito!', 'Produto Cadastrado!')
     },error => {
       this.loading = false;
       this.toastr.error('Opps.. Produto não registrado!', 'Error');
       console.log(error);
     })
   }
+
+  editarProduto(id: string){
+    const cadastro: any = {
+      categoria: this.form.value.categoria,
+      preco: this.form.value.preco,
+      descricao: this.form.value.descricao,
+    }
+
+    this.loading = true;
+    this.armazem.editar(id,cadastro).then(()=>{
+      this.loading = false;
+      console.log('Editar Cadastrado!');
+      this.form.reset();
+      this.id = undefined;
+      this.toastr.info('O produto foi editado com êxito!', 'Produto Editado!')
+    },error => {
+      this.toastr.error('Opps.. Produto não editado!', 'Error');
+      console.log(error);
+    })
+
+  }
+
+
+
   }
 
 
