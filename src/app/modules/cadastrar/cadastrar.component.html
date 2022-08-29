@@ -1,7 +1,11 @@
-<h3 class="mx-2 border-bottom">Insira as informações do produto!</h3>
-
-<form [formGroup]="form" (ngSubmit)="decidir()" class="row g-3">
-      <mat-form-field appearance="outline" class="col-4">
+<form [formGroup]="form" (ngSubmit)="decidir()" class="row m-0 p-0">
+  <div class="border m-0 p-0">
+    <div class=" px-2 py-2 d-flex align-items-center border">
+      <i class="bi bi-box-arrow-in-down-left mx-2"></i>
+      <h3 class="py-1 m-0">Insira as informações do produto!</h3>
+    </div>
+    <div class="mx-3">
+      <mat-form-field appearance="outline" class="col-4 py-2">
         <mat-label>Categoria</mat-label>
         <mat-select formControlName="categoria" required>
           <mat-option value="Brinquedos">Brinquedos</mat-option>
@@ -9,17 +13,21 @@
           <mat-option value="Informática">Informática</mat-option>
           <mat-option value="Roupas">Roupas</mat-option>
         </mat-select>
-
+        <mat-error *ngIf="form.get('categoria')?.invalid">A categoria não pode estar em branco!</mat-error>
       </mat-form-field>
-      <mat-form-field appearance="outline" class="col-2 mx-3">
+      <mat-form-field appearance="outline" class="col-2 mx-3 py-2">
         <mat-label>Preço</mat-label>
-        <input matInput placeholder="Insira..." type="number" class="form-control" formControlName="preco" required>
+        <input matInput placeholder="Insira..." formControlName="preco" autocomplete="off" currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" required>
+        <mat-error *ngIf="form.get('preco')?.invalid">O preço não pode estar em branco!</mat-error>
       </mat-form-field>
-      <mat-form-field appearance="outline" class="col-10">
+      <mat-form-field appearance="outline" class="col-10 py-2">
         <mat-label>Descrição</mat-label>
-        <textarea matInput placeholder="Insira..." type="text" class="form-control" formControlName="descricao" required></textarea>
+        <textarea matInput placeholder="Insira..." type="text" formControlName="descricao" required></textarea>
+        <mat-error *ngIf="form.get('descricao')?.invalid">A descrição não pode estar em branco!</mat-error>
       </mat-form-field>
-  <div class="p-0 m-0" align="center">
-    <button mat-raised-button [disabled]="!form.valid" class="btn btn-primary text-white" type="submit"><i class="bi bi-arrow-up-square mx-2 mt-5"></i>Cadastrar</button>
-</div>
+      <div class="p-0 my-2" align="center">
+        <button mat-raised-button [disabled]="!form.valid" class="btn btn-primary text-white" type="submit"><i class="bi bi-arrow-up-square mx-2 my-5" title="Cadastrar"></i>Cadastrar</button>
+      </div>
+    </div>
+  </div>
 </form>

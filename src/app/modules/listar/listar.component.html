@@ -1,27 +1,31 @@
 
+<div class="border p-0 m-0">
+  <div class=" px-2 py-2 d-flex align-items-center border">
+    <i class="bi bi-box-seam mx-2"></i>
+    <h3 class="modal-title py-1 m-0">Listagem de Produtos</h3>
+  </div>
+  <table class="table text-center">
+    <thead>
+    <tr>
+      <th scope="col" class="py-3">Categoria</th>
+      <th scope="col" class="py-3">Preço</th>
+      <th scope="col" class="py-3">Descrição</th>
+      <th scope="col" class="py-3">Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let produto of product">
+      <td class="py-3">{{ produto.categoria }}</td>
+      <td class="py-3">{{ produto.preco| currency:'BRL':true:'1.2-2' }}</td>
+      <td class="py-3">{{ produto.descricao}}</td>
+      <td>
+        <button mat-button (click)="editarProdutos(produto)"><i  class="bi bi-pencil-square fs-5" title="Editar"></i></button>
+        <button mat-button (click)="deletarProdutos(produto.id)" ><i class="bi bi-trash3 fs-5" title="Excluir"></i></button>
+      </td>
+    </tr>
+    </tbody>
 
-
-
-
-
-<div class="mx-2">
-
-    <h3 class="mx-2 border-bottom tit">
-    Lista de produtos cadastrados
-    </h3>
-    <table class="table">
-      <tbody>
-      <tr *ngFor="let produto of product">
-        <td>{{ produto.categoria }}</td>
-        <td>{{ produto.preco }}</td>
-        <td>{{ produto.descricao}}</td>
-        <td>
-          <button (click)="editarProdutos(produto)"><i  class="bi bi-pencil-square text-info f-5 mx-3"></i></button>
-          <button (click)="deletarProdutos(produto.id)" ><i class="bi bi-trash3 text-danger f-5 mx-3"></i></button>
-        </td>
-      </tr>
-      </tbody>
-    </table>
+  </table>
 
 </div>
 

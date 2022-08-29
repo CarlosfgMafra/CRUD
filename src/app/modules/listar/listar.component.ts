@@ -1,16 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, DEFAULT_CURRENCY_CODE, LOCALE_ID, OnInit} from '@angular/core';
 import {ArmazemService} from "../../service/armazem.service";
 import {ToastrService} from "ngx-toastr";
 import {ProdutoModel} from "../../shared/interface/produto";
-import {error} from "@angular/compiler-cli/src/transformers/util";
+import {registerLocaleData} from "@angular/common";
+import localePt from '@angular/common/locales/pt';// IMPORTANT
+registerLocaleData(localePt); //
 
 @Component({
   selector: 'app-listar',
   templateUrl: './listar.component.html',
-  styleUrls: ['./listar.component.css']
+  styleUrls: ['./listar.component.css'],
+  providers: [{
+    provide: LOCALE_ID, useValue: 'pt' },{
+    provide: DEFAULT_CURRENCY_CODE, useValue: 'BRL' },
+  ],
 })
 export class ListarComponent implements OnInit {
-
   product:ProdutoModel[] =[];
 
   constructor(

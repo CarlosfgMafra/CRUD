@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, DEFAULT_CURRENCY_CODE, LOCALE_ID, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ProdutoModel} from "../../shared/interface/produto";
 import {ArmazemService} from "../../service/armazem.service";
@@ -8,7 +8,7 @@ import {ToastrService} from "ngx-toastr";
 @Component({
   selector: 'app-cadastrar',
   templateUrl: './cadastrar.component.html',
-  styleUrls: ['./cadastrar.component.css']
+  styleUrls: ['./cadastrar.component.css'],
 })
 export class CadastrarComponent implements OnInit {
   form: FormGroup;
